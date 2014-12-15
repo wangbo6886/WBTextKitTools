@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "WBTextStorage.h"
+#import "WBFaceView.h"
 
-@interface WBTextView : UITextView
+@interface WBTextView : UITextView<WBFaceDelegate>
 
 @property (nonatomic, copy) void (^detectionBlock)(WBTextKeyWord keyWord, NSString *string, NSString *protocol, NSRange range);
 

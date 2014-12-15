@@ -9,6 +9,7 @@
 #import "WBTextView.h"
 #import "YLGIFImage.h"
 #import "YLImageView.h"
+#import "WBFaceView.h"
 
 @implementation WBTextView{
     WBTextStorage *_wbTextStorage;
@@ -52,6 +53,7 @@
 #pragma mark -----------------------------------属性调整
 - (void)setup
 {
+    self.editable = YES;
     self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.backgroundColor = [UIColor clearColor];
     self.textContainer.lineFragmentPadding = 0;
@@ -174,6 +176,21 @@
     [super insertText:inserStr];
     //由于在插入表情时，光标位置异常，需要手动调整
     [self setSelectedRange:NSMakeRange(_wbTextStorage.selectedRangeLocation, 0)];
+}
+
+#pragma mark **************************************************************************************************************************
+#pragma mark -----------------------------------委托响应-----------------------------------
+#pragma mark **************************************************************************************************************************
+#pragma mark -----------------------------------插入表情
+- (void)insertFaceWithKey:(NSString *)faceKey
+{
+    [self insertText:faceKey];
+}
+
+#pragma mark -----------------------------------删除表情
+- (void)deleteFace
+{
+    [_wbTextStorage replaceCharactersInRange:NSMakeRange(self.selectedRange.location - 1, 1) withString:@""];
 }
 
 #pragma mark **************************************************************************************************************************

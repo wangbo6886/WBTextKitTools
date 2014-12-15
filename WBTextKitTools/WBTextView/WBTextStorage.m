@@ -14,7 +14,7 @@
 #define RemoveStringName @"NSRemoveString"
 #define RGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 #define TextColor RGBColor(0 , 0, 0)
-#define AtColor RGBColor(30 , 144 , 255)
+#define AtColor RGBColor(255 , 0 , 0)
 #define PoundColor RGBColor(128, 138 , 135)
 
 @implementation WBTextStorage
@@ -47,7 +47,7 @@
         _rangesOfKeyWords = [[NSMutableArray alloc] init];//存储特殊文本的RANGE
         _validProtocols = @[@"http", @"https"];//链接协议开头
         //表情集合
-        NSString *emojiFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"emotionImage.plist"];
+        NSString *emojiFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"emotionGifImage.plist"];
         _emojiDictionary = [[NSDictionary alloc] initWithContentsOfFile:emojiFilePath];
         _attachmentRangeArray = [[NSMutableArray alloc]init];//存储附本的RANGE
         _attachmentDictionary = [[NSMutableDictionary alloc]init];//存储附本的文字内容
@@ -272,8 +272,10 @@
             
             //取得.的位置
             NSRange imageSuffixRange = [imageName rangeOfString:@"."];
-            NSString *imageSuffixStr = [imageName substringFromIndex:imageSuffixRange.location + 1];
-            
+            NSString *imageSuffixStr = @"";
+            if (imageSuffixRange.location != NSNotFound) {
+                imageSuffixStr = [imageName substringFromIndex:imageSuffixRange.location + 1];
+            }
             /*
              如果是GIF并且为不可编辑的情况下，就镶嵌一个透明的图。
              以大部分需求来看，GIF图只是在纯显示的情况下才能显示，如果是编辑状态下，还是只显示静态图就行了。
@@ -622,7 +624,10 @@
     
     //取得.的位置
     NSRange imageSuffixRange = [imageName rangeOfString:@"."];
-    NSString *imageSuffixStr = [imageName substringFromIndex:imageSuffixRange.location + 1];
+    NSString *imageSuffixStr = @"";
+    if (imageSuffixRange.location != NSNotFound) {
+        imageSuffixStr = [imageName substringFromIndex:imageSuffixRange.location + 1];
+    }
     
     if ([imageSuffixStr isEqualToString:@"gif"]) {
         return imageName;
