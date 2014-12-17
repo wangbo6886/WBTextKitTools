@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WBTextView.h"
 
-@interface ViewController : UIViewController<UITextViewDelegate>
+@interface ViewController : UIViewController<UITextViewDelegate,WBTextDelegate>
 
 
 @end

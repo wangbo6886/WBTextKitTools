@@ -147,7 +147,8 @@
 }
 
 #pragma mark -----------------------------------重写detectionBlock设置方法
-- (void)setDetectionBlock:(void (^)(WBTextKeyWord, NSString *, NSString *, NSRange))detectionBlock {
+- (void)setDetectionBlock:(void (^)(WBTextKeyWord, NSString *, NSString *, NSRange))detectionBlock
+{
     if (detectionBlock) {
         _detectionBlock = [detectionBlock copy];
         self.userInteractionEnabled = YES;
@@ -191,6 +192,9 @@
 - (void)deleteFace
 {
     [_wbTextStorage replaceCharactersInRange:NSMakeRange(self.selectedRange.location - 1, 1) withString:@""];
+    if ([_wbDelegate respondsToSelector:@selector(WBTextViewDidDeleteFace)]) {
+        [_wbDelegate WBTextViewDidDeleteFace];
+    }
 }
 
 #pragma mark **************************************************************************************************************************

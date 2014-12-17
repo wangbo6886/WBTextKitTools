@@ -10,8 +10,14 @@
 #import "WBTextStorage.h"
 #import "WBFaceView.h"
 
+@protocol WBTextDelegate <NSObject>
+@optional
+- (void)WBTextViewDidDeleteFace;
+@end
+
 @interface WBTextView : UITextView<WBFaceDelegate>
 
 @property (nonatomic, copy) void (^detectionBlock)(WBTextKeyWord keyWord, NSString *string, NSString *protocol, NSRange range);
+@property (nonatomic, weak) id<WBTextDelegate> wbDelegate;
 
 @end

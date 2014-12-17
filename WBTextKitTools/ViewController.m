@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "WBTextStorage.h"
-#import "WBTextView.h"
 #import "WBFaceView.h"
 
 @interface ViewController (){
@@ -42,6 +41,7 @@
     
     _textView = [[WBTextView alloc]initWithFrame:CGRectMake(0, editableLabel.frame.size.height + 10, self.view.frame.size.width, 150) textContainer:nil];
     _textView.editable = YES;
+    _textView.wbDelegate = self;
     _textView.backgroundColor = [UIColor yellowColor];
     _textView.font = [UIFont fontWithName:@"HelveticaNeue" size:17.0];
     _textView.delegate = self;
@@ -88,7 +88,14 @@
     }
 }
 
+#pragma mark -----------------------------------文本被改变
 - (void)textViewDidChange:(UITextView *)textView
+{
+    _noEditableTextView.text = _textView.text;
+}
+
+#pragma mark -----------------------------------表情键盘删除
+- (void)WBTextViewDidDeleteFace
 {
     _noEditableTextView.text = _textView.text;
 }
