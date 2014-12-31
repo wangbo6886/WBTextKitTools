@@ -56,7 +56,7 @@
     
     _noEditableTextView = [[WBTextView alloc]initWithFrame:CGRectMake(0, noEditableLabel.frame.origin.y + noEditableLabel.frame.size.height + 10, self.view.frame.size.width, 150)];
     _noEditableTextView.editable = NO;
-    _noEditableTextView.backgroundColor = [UIColor whiteColor];
+    _noEditableTextView.backgroundColor = [UIColor yellowColor];
     _noEditableTextView.font = [UIFont fontWithName:@"HelveticaNeue" size:17.0];
     _noEditableTextView.text = _textView.text;
     [self.view addSubview:_noEditableTextView];
@@ -92,6 +92,9 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     _noEditableTextView.text = _textView.text;
+    CGRect rect = _noEditableTextView.frame;
+    rect.size.height = [_noEditableTextView getHeight];
+    _noEditableTextView.frame = rect;
 }
 
 #pragma mark -----------------------------------表情键盘删除

@@ -20,4 +20,5 @@
 @property (nonatomic, copy) void (^detectionBlock)(WBTextKeyWord keyWord, NSString *string, NSString *protocol, NSRange range);
 @property (nonatomic, weak) id<WBTextDelegate> wbDelegate;
 
+- (CGFloat)getHeight;
 @end

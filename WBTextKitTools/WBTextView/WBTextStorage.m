@@ -668,4 +668,12 @@
     NSLog(@"还原后的纯文本为：%@",text);
     return text;
 }
+
+#pragma mark -----------------------------------得到字符的高度
+- (CGFloat)getStringHeightWithSize:(CGSize)size
+{
+    CGSize stringSize = [self.string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:_attributesText context:nil].size;
+    
+    return stringSize.height;
+}
 @end

@@ -35,4 +35,5 @@ typedef enum {
 - (NSString *)getPlainText;
 - (BOOL)isEmoji:(NSString *)text;
 - (NSString *)isGifEmoji:(NSString *)text;
+- (CGFloat)getStringHeightWithSize:(CGSize)size;
 @end
